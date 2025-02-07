@@ -1,0 +1,23 @@
+# copied from https://github.com/srcwr/srcwrtimer/blob/main/.cargo/config.toml
+
+[build]
+target-dir = "_build"
+
+# 2025... we can rely on CPUs to be using SSE2... not that it will likely change much in codegen...
+rustflags = ["-Ctarget-feature=+sse2"]
+
+target = "i686-pc-windows-msvc"
+
+[env]
+CFLAGS_i686_pc_windows_msvc = "/Zi /FS"
+CXXFLAGS_i686_pc_windows_msvc = "/Zi /FS"
+
+[target.i686-pc-windows-msvc]
+rustflags = [
+	# 2025... we can rely on CPUs to be using SSE2... not that it will likely change much in codegen...
+	"-Ctarget-feature=+sse2",
+	# TODO: Do we want static crt on Windows? I can't remember if there was a reason for this...
+	"-Ctarget-feature=+crt-static",
+	# Yeah, we want frame pointers...
+	"-Cforce-frame-pointers=yes",
+]
