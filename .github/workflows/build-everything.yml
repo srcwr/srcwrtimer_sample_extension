@@ -72,8 +72,7 @@ jobs:
         working-directory: ./srcwrtimer_sample_extension
         run: cargo make compile-srcwrtimer-scripts
       - name: Upload package
-        working-directory: ./srcwrtimer_sample_extension
         uses: actions/upload-artifact@v4
         with:
           name: sample-${{ github.head_ref || github.ref_name }}-${{ env.GITHUB_SHA_SHORT }}
-          path: _package/srcwrtimer
+          path: srcwrtimer_sample_extension/_package/srcwrtimer
