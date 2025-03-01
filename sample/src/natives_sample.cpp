@@ -18,7 +18,6 @@ bool Extension_OnLoad(char* error, size_t maxlength)
 
 void Extension_OnUnload()
 {
-	// NOTE: We will crash if unloaded while an compress/uncompress action is running... lol
 }
 
 void Extension_OnAllLoaded() {}
