@@ -19,6 +19,10 @@ env:
 jobs:
   build_everything:
     runs-on: windows-latest
+    strategy:
+      matrix:
+        targetos: ["linux", "windows"]
+        targetbits: ["x32", "x64"]
 
     steps:
       - name: Prepare env
@@ -44,25 +48,21 @@ jobs:
       - name: Install Rust toolchains
         working-directory: ./srcwrtimer_sample_extension
         run: |
-          cargo make rustup-linux
-          cargo make rustup-msvc
+          cargo make --profile ${{ matrix.targetbits }} rustup-${{ matrix.targetos }}
       - name: Clone alliedmodders repositories
         run: cargo make clone-alliedmodders
         working-directory: ./srcwrtimer_sample_extension
       - name: Setup SourcePawn Compiler
         uses: rumblefrog/setup-sp@v1.2.4
         with:
-          version: '1.12.7187' ### UPDATE Makefile.toml whenever this is updated.
+          version: '1.12.7193' ### UPDATE Makefile.toml whenever this is updated.
       - name: Setup Zig
         uses: mlugg/setup-zig@v1
         with:
           version: '0.13.0' ### UPDATE Makefile.toml whenever this is updated.
-      - name: Build extensions for Linux
+      - name: Build extensions
         working-directory: ./srcwrtimer_sample_extension
-        run: cargo make linux
-      - name: Build extensions for Windows/MSVC
-        working-directory: ./srcwrtimer_sample_extension
-        run: cargo make msvc
+        run: cargo make --profile ${{ matrix.targetbits }} ${{ matrix.targetos }}
       - name: Copy things to _package
         working-directory: ./srcwrtimer_sample_extension
         run: |
@@ -74,5 +74,5 @@ jobs:
       - name: Upload package
         uses: actions/upload-artifact@v4
         with:
-          name: sample-${{ github.head_ref || github.ref_name }}-${{ env.GITHUB_SHA_SHORT }}
+          name: sample-${{ github.head_ref || github.ref_name }}-${{ env.GITHUB_SHA_SHORT }}-${{ matrix.targetos }}-${{ matrix.targetbits }}
           path: srcwrtimer_sample_extension/_package/srcwrtimer
