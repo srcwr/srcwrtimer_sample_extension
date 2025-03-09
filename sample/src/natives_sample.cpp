@@ -1,5 +1,5 @@
-#include "../../extshared/src/extension.h"
-#include "../../extshared/src/coreident.hpp"
+#include "../../../srcwrtimer/extshared/src/extension.h"
+#include "../../../srcwrtimer/extshared/src/coreident.hpp"
 #include "rust_exports_sample.h"
 
 
