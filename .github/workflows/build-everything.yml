@@ -8,8 +8,10 @@ name: Build everything
 # TODO: add another job that only builds sourcepawn files when only those are touched
 on:
   push:
+    branches: [ 'release' ]
     paths: ['**.rs', '**.h', '**.hpp', '**.c', '**.cpp', '**.sp', '**.inc', '**.toml', '**.lock', '**.yml']
   pull_request:
+    branches: [ 'release' ]
     paths: ['**.rs', '**.h', '**.hpp', '**.c', '**.cpp', '**.sp', '**.inc', '**.toml', '**.lock', '**.yml']
   workflow_dispatch:
 
