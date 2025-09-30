@@ -18,10 +18,10 @@ extshared_build_helper.workspace = true
 extshared.workspace = true
 
 [target.'cfg(windows)'.dependencies]
-windows-targets = "0.52"
+windows-targets = "0.53"
 
 [target.'cfg(windows)'.dependencies.windows]
-version = "0.58"
+version = "0.62"
 features = [
 	"Win32_System_SystemInformation", # RtlGetVersion
 ]
