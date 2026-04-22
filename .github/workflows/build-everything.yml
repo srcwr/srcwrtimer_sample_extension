@@ -58,7 +58,7 @@ jobs:
         with:
           version: '1.12.7228' ### UPDATE Makefile.toml whenever this is updated.
       - name: Setup Zig
-        uses: mlugg/setup-zig@v1
+        uses: mlugg/setup-zig@v2
         with:
           version: '0.16.0' ### UPDATE Makefile.toml whenever this is updated.
       - name: Build extensions
